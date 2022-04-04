@@ -1,0 +1,1 @@
+INSERT INTO public.student(id, first_name, last_name, school_class_id) VALUES (1, 'name', 'last', null);
