@@ -29,12 +29,12 @@ public class SchoolClass implements Serializable {
     //@OneToMany(mappedBy = "school_class_id")
     private Set<Student> students = new HashSet<>(); // list of student's in the class
 
-    public SchoolClass(int number, char letter) {
+    /*public SchoolClass(int number, char letter) {
         this.number = number;
         this.letter = letter;
     }
 
     public SchoolClass() {
 
-    }
+    }*/
 }

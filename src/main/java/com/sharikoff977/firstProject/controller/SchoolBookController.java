@@ -24,7 +24,7 @@ import java.util.*;
 @Controller
 public class SchoolBookController {
 
-    @Autowired
+    /*@Autowired
     StudentRepo studentRepo;
     @Autowired
     SchoolClassRepo schoolClassRepo;
@@ -32,23 +32,23 @@ public class SchoolBookController {
     SubjectRepo subjectRepo;
     @Autowired
     GradeRepo gradeRepo;
-    /*
+    *//*
     Filling the database with students
-     */
+     *//*
     private void fillDatabase() {
         // Create schoolclasses
         SchoolClass schoolClass1a = new SchoolClass(10,'a');
         SchoolClass schoolClass1b = new SchoolClass(10,'b');
         SchoolClass schoolClass1c = new SchoolClass(10,'c');
         // create students
-        Student student1a_1 = new Student("Dima", "Sharovskiy"/*,schoolClass1a*/);
-        Student student1a_2 = new Student("Anna", "Parkhomenko"/*,schoolClass1a*/);
-        Student student1b_1 = new Student("Anton", "Solyanik"/*,schoolClass1b*/);
-        Student student1b_2 = new Student("Olya", "Hnashuk"/*,schoolClass1b*/);
-        Student student1b_3 = new Student("Elona", "Kanarska"/*,schoolClass1b*/);
-        Student student1c_1 = new Student("Oleg", "Gnashuk"/*,schoolClass1c*/);
-        Student student1c_2 = new Student("Dashka", "Kakashka"/*,schoolClass1c*/);
-        Student student1c_3 = new Student("Ren", "Vsempuzdec"/*,schoolClass1c*/);
+        Student student1a_1 = new Student("Dima", "Sharovskiy"*//*,schoolClass1a*//*);
+        Student student1a_2 = new Student("Anna", "Parkhomenko"*//*,schoolClass1a*//*);
+        Student student1b_1 = new Student("Anton", "Solyanik"*//*,schoolClass1b*//*);
+        Student student1b_2 = new Student("Olya", "Hnashuk"*//*,schoolClass1b*//*);
+        Student student1b_3 = new Student("Elona", "Kanarska"*//*,schoolClass1b*//*);
+        Student student1c_1 = new Student("Oleg", "Gnashuk"*//*,schoolClass1c*//*);
+        Student student1c_2 = new Student("Dashka", "Kakashka"*//*,schoolClass1c*//*);
+        Student student1c_3 = new Student("Ren", "Vsempuzdec"*//*,schoolClass1c*//*);
         // Add students to schoolclasses
         schoolClass1a.getStudents().add(student1a_1);
         schoolClass1a.getStudents().add(student1a_2);
@@ -63,14 +63,14 @@ public class SchoolBookController {
         schoolClass1c.getStudents().add(student1c_2);
         schoolClass1c.getStudents().add(student1c_3);
         // save students
-        /*studentRepo.save(student1a_1);
+        *//*studentRepo.save(student1a_1);
         studentRepo.save(student1a_2);
         studentRepo.save(student1b_1);
         studentRepo.save(student1b_2);
         studentRepo.save(student1b_3);
         studentRepo.save(student1c_1);
         studentRepo.save(student1c_2);
-        studentRepo.save(student1c_3);*/
+        studentRepo.save(student1c_3);*//*
         // save schoolclasses
         schoolClassRepo.save(schoolClass1a);
         schoolClassRepo.save(schoolClass1b);
@@ -104,53 +104,53 @@ public class SchoolBookController {
         gradeRepo.save(grade8);
 
     }
-    /*
+    *//*
     Function call fillDatabase()
-     */
+     *//*
     @GetMapping("/init-db")
     @ResponseBody
     public void initDb(){
         fillDatabase();
     }
-    /*
+    *//*
     Withdrawal of all students
-     */
+     *//*
     @GetMapping("/students")
     @ResponseBody
     public Object showAllStudents(){
         List<Student> students = studentRepo.findAll();
         return students;
     }
-    /*
+    *//*
     Withdrawal of all school classes
-     */
+     *//*
     @GetMapping("/schoolclasses")
     @ResponseBody
     public Object showAllSchollClasses(){
         List<SchoolClass> schoolClasses = schoolClassRepo.findAll();
         return schoolClasses;
     }
-    /*
+    *//*
     Withdrawal of all subjects
-     */
+     *//*
     @GetMapping("/subjects")
     @ResponseBody
     public Object showAllSubjects(){
         List<Subject> subjects = subjectRepo.findAll();
         return subjects;
     }
-    /*
+    *//*
     Withdrawal of all grades
-     */
+     *//*
     @GetMapping("/grades")
     @ResponseBody
     public Object showAllGrades(){
         List<Grade> grades = gradeRepo.findAll();
         return grades;
     }
-    /*
+    *//*
     Adding schoolClass
-     */
+     *//*
     @GetMapping("/add-schoolclass")
     @ResponseBody
     public Long addSchoolClass(@RequestParam int number,
@@ -161,27 +161,27 @@ public class SchoolBookController {
 
         return id;
     }
-    /*
+    *//*
     Adding students
-     */
+     *//*
     @GetMapping("/add-students")
     @ResponseBody
     public void addStudents(@RequestParam String firstName,
                             @RequestParam String lastName,
                             @RequestParam Long schoolClassId){
         Student student = new Student(firstName,lastName);
-        /*Optional<SchoolClass> schoolClassOptional = schoolClassRepo.findById(schoolClassId);
+        *//*Optional<SchoolClass> schoolClassOptional = schoolClassRepo.findById(schoolClassId);
         List<SchoolClass> schoolClasses = new ArrayList<>();
-        schoolClassOptional.ifPresent(schoolClasses::add);*/
+        schoolClassOptional.ifPresent(schoolClasses::add);*//*
         if (schoolClassRepo.existsById(schoolClassId)){
             SchoolClass schoolClass = schoolClassRepo.getById(schoolClassId);
             schoolClass.getStudents().add(student);
             schoolClassRepo.save(schoolClass);
         }
     }
-    /*
+    *//*
     Adding subjects
-     */
+     *//*
     @GetMapping("/add-subject")
     @ResponseBody
     public Long addSubject(@RequestParam String title){
@@ -191,9 +191,9 @@ public class SchoolBookController {
 
         return id;
     }
-    /*
+    *//*
     Adding grades
-     */
+     *//*
     @GetMapping("/add-grade")
     @ResponseBody
     public Long addGrade(@RequestParam Long idSubject,
@@ -218,9 +218,9 @@ public class SchoolBookController {
 
         return id;
     }
-    /*
+    *//*
     Show grades of student
-     */
+     *//*
     @GetMapping("/show-grades-of-student")
     @ResponseBody
     public List<Grade> showAllGradesOfStudent(@RequestParam Long id){
@@ -239,9 +239,9 @@ public class SchoolBookController {
         }
         return gradesId;
     }
-    /*
+    *//*
     Show grades of student by date
-     */
+     *//*
     @GetMapping("/show-grades-of-student-by-date")
     @ResponseBody
     public List<Grade> showAllGradesOfStudentByDate(@RequestParam Long id,
@@ -263,9 +263,9 @@ public class SchoolBookController {
         }
         return gradesId;
     }
-    /*
+    *//*
     Editing school class
-     */
+     *//*
     @GetMapping("/edit-schoolclass")
     @ResponseBody
     public int editingSchoolClass(@RequestParam Long id,
@@ -280,9 +280,9 @@ public class SchoolBookController {
         }
         return 0;
     }
-    /*
+    *//*
     Editing student
-     */
+     *//*
     @GetMapping("/edit-student")
     @ResponseBody
     public int editStudent(@RequestParam Long id,
@@ -302,9 +302,9 @@ public class SchoolBookController {
         }
         return 0;
     }
-    /*
+    *//*
     Editing grade
-     */
+     *//*
     @GetMapping("/edit-grade")
     @ResponseBody
     public int editGrade(@RequestParam Long id,
@@ -317,19 +317,19 @@ public class SchoolBookController {
         }
         return 0;
     }
-    /*
+    *//*
     Delete school class
-     */
+     *//*
     @GetMapping("/delete-school-class")
     @ResponseBody
     public ResponseEntity deleteSchoolClass(@RequestParam Long id){
 
-        /*if (schoolClassRepo.existsById(id)){
+        *//*if (schoolClassRepo.existsById(id)){
             SchoolClass schoolClass = schoolClassRepo.findById(id).orElseThrow();
             schoolClassRepo.delete(schoolClass);
             return 1;
         }
-        return 0;*/
+        return 0;*//*
         try {
             schoolClassRepo.deleteById(id);
         } catch (EmptyResultDataAccessException e){
@@ -337,18 +337,18 @@ public class SchoolBookController {
         }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-    /*
+    *//*
     Delete student
-     */
+     *//*
     @GetMapping("/delete-student")
     @ResponseBody
     public ResponseEntity deleteStudent(@RequestParam Long id){
-        /*if (studentRepo.existsById(id)){
+        *//*if (studentRepo.existsById(id)){
             Student student = studentRepo.findById(id).orElseThrow();
             studentRepo.delete(student);
             studentRepo.deleteById(id);
             return 1;
-        }*/
+        }*//*
         try
         {
             studentRepo.deleteById(id);
@@ -357,61 +357,5 @@ public class SchoolBookController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    /*@ResponseStatus(HttpStatus.FORBIDDEN)
-    private class ForbiddenException extends RuntimeException {
-
-    }*/
-    /*
-    Удаление работника из БД
-     *//*
-    @GetMapping("/fire-employee")
-    @ResponseBody
-    public Long fireEmployee(@RequestParam String firstName,
-                             @RequestParam String lastName){
-        List<Student> students = studentRepo.findAll();
-        Long id = null;
-
-        for (Student empl : students
-             ) {
-            if (empl.getFirstName().equals(firstName) && empl.getLastName().equals(lastName)){
-                id = empl.getId();
-            }
-        }
-
-        if (id != null){
-            studentRepo.deleteById(id);
-        }
-
-        return id;
-    }
-    *//*
-    Изменение работника
-     *//*
-    @GetMapping("/change-employee")
-    @ResponseBody
-    public Long changeEmployee(@RequestParam String firstNameSearch,
-                               @RequestParam String lastNameSearch,
-                               @RequestParam String firstName,
-                               @RequestParam String lastName){
-        List<Student> students = studentRepo.findAll();
-        Long id = 0L;
-
-        for (Student empl : students
-             ) {
-            if (empl.getFirstName().equals(firstNameSearch) && empl.getLastName().equals(lastNameSearch)){
-                id = empl.getId();
-            }
-        }
-
-        Student student = studentRepo.findById(id).orElseThrow();
-
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-
-        studentRepo.save(student);
-
-        return id;
     }*/
 }

@@ -25,11 +25,11 @@ public class Student implements Serializable {
     private String firstName; // student's name
 
     private String lastName; // student's last name
-    //@ManyToOne
+    @ManyToOne
     //@JoinColumn
-    //private SchoolClass schoolClass; // student's school class
+    private SchoolClass schoolClass; // student's school class
 
-    public Student(String firstName, String lastName/*, SchoolClass schoolClass*/) {
+    /*public Student(String firstName, String lastName*//*, SchoolClass schoolClass*//*) {
         this.firstName = firstName;
         this.lastName = lastName;
         //this.schoolClass = schoolClass;
@@ -37,5 +37,5 @@ public class Student implements Serializable {
 
     public Student() {
 
-    }
+    }*/
 }
