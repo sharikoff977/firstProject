@@ -1,5 +1,6 @@
 package com.sharikoff977.firstProject.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,9 +12,7 @@ import java.time.ZonedDateTime;
 Class Grade
  */
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Grade {
 
     @Id
@@ -28,10 +27,10 @@ public class Grade {
     private int value; // value grade
     private ZonedDateTime dateTime; // date grade
 
-    public Grade(Subject subject, Student student, int value, ZonedDateTime dateTime) {
+    /*public Grade(Subject subject, Student student, int value, ZonedDateTime dateTime) {
         this.subject = subject;
         this.student = student;
         this.value = value;
         this.dateTime = dateTime;
-    }
+    }*/
 }
