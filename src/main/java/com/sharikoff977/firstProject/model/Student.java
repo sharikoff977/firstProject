@@ -19,13 +19,13 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // student id
 
     private String firstName; // student's name
 
     private String lastName; // student's last name
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     //@JoinColumn
     private SchoolClass schoolClass; // student's school class
 

@@ -14,16 +14,16 @@ import org.mapstruct.Named;
 public interface StudentMapper extends EntityMapper<StudentDTO, Student>{
     @Mapping(source = "schoolClass.id", target = "schoolClassId")
     @Mapping(source = "schoolClass.number", target = "schoolClassNumber")
-    @Mapping(source = "schoolClass.letter", target = "schoolClassLetter" , expression = "")
+    @Mapping(source = "schoolClass.letter", target = "schoolClassLetter")
     StudentDTO toDto(Student student);
 
-    @Mapping(source = "schoolClassId", target = "schoolClass", qualifiedByName = "someMethod")
+    @Mapping(source = "schoolClassId", target = "schoolClass"/*, qualifiedByName = "someMethod"*/)
     Student toEntity(StudentDTO studentDTO);
 
-    @Named("someMethod")
+    /*@Named("someMethod")
     default Object ghfhfjhfjj(Long id){
         return new Object();
-    }
+    }*/
 
     default Student fromId(Long id){
         if (id == null){

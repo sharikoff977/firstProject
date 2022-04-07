@@ -3,6 +3,7 @@ package com.sharikoff977.firstProject.controller;
 import com.sharikoff977.firstProject.facades.StudentFacade;
 import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.model.Student;
+import com.sharikoff977.firstProject.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class StudentController {
 
     private final StudentFacade studentFacade;
+    private final StudentService studentService;
 
     /**
      *{@code POST /student} : Create a new student.
@@ -88,6 +90,14 @@ public class StudentController {
         Optional<StudentDTO> studentDTO = studentFacade.findOne(id);
         return ResponseEntity.of(studentDTO);
     }
+
+    @GetMapping("/student-by-shcool-class-id/{id}")
+    public ResponseEntity<List<StudentDTO>> findAllStudentsBySchoolClassId(@PathVariable Long id){
+        log.debug("REST Request to find all student by school class id : {}", id);
+        List<StudentDTO> result = studentService.findBySchoolClass(id);
+        return ResponseEntity.ok().header("x-total-count", String.valueOf(result.size())).body(result);
+    }
+
     /**
      * {@code DELETE /student/{id}} delete the "id" student.
      *

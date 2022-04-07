@@ -17,7 +17,7 @@ public class SchoolClass implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // school class id
 
     private int number; // class number
@@ -26,7 +26,7 @@ public class SchoolClass implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "school_class_id")
-    //@OneToMany(mappedBy = "school_class_id")
+    //@OneToMany(mappedBy = "schoolClass")
     private Set<Student> students = new HashSet<>(); // list of student's in the class
 
     /*public SchoolClass(int number, char letter) {

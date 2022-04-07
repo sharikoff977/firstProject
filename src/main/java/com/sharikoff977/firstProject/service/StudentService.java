@@ -1,5 +1,6 @@
 package com.sharikoff977.firstProject.service;
 
+import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.model.Student;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public interface StudentService {
      * @return the entity.
      * */
     Optional<Student> findOne(Long id);
+
+    List<StudentDTO> findBySchoolClass(Long id);
 
     /**
      * Delete "id" student.

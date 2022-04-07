@@ -3,6 +3,7 @@ package com.sharikoff977.firstProject.facades.impl;
 import com.sharikoff977.firstProject.facades.StudentFacade;
 import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.model.Student;
+import com.sharikoff977.firstProject.repo.StudentRepo;
 import com.sharikoff977.firstProject.service.StudentService;
 import com.sharikoff977.firstProject.service.mapper.StudentMapper;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +53,12 @@ public class StudentFacadeImpl implements StudentFacade {
         return Optional.of(studentDTO);
         //return studentService.findOne(id).map(studentMapper::toDto);
     }
+
+    /*@Override
+    public List<StudentDTO> findAllBySchoolClassId(Long id) {
+        log.debug("Request to find all students by school class id : {}", id);
+        return studentService.findBySchoolClass(id).stream().map(studentMapper::toDto).collect(Collectors.toList());
+    }*/
 
     @Override
     public void delete(Long id) {

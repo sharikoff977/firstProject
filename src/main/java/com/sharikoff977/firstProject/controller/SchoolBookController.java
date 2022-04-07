@@ -1,5 +1,7 @@
 package com.sharikoff977.firstProject.controller;
 
+import com.sharikoff977.firstProject.facades.SchoolClassFacade;
+import com.sharikoff977.firstProject.facades.dto.SchoolClassDTO;
 import com.sharikoff977.firstProject.model.Grade;
 import com.sharikoff977.firstProject.model.SchoolClass;
 import com.sharikoff977.firstProject.model.Subject;
@@ -8,6 +10,8 @@ import com.sharikoff977.firstProject.repo.SchoolClassRepo;
 import com.sharikoff977.firstProject.repo.StudentRepo;
 import com.sharikoff977.firstProject.model.Student;
 import com.sharikoff977.firstProject.repo.SubjectRepo;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -21,7 +25,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
+@Slf4j
 public class SchoolBookController {
 
     /*@Autowired
@@ -31,16 +37,19 @@ public class SchoolBookController {
     @Autowired
     SubjectRepo subjectRepo;
     @Autowired
-    GradeRepo gradeRepo;
-    *//*
-    Filling the database with students
-     *//*
+    GradeRepo gradeRepo;*/
+/*
+    private final SchoolClassFacade schoolClassFacade;
+
     private void fillDatabase() {
-        // Create schoolclasses
-        SchoolClass schoolClass1a = new SchoolClass(10,'a');
-        SchoolClass schoolClass1b = new SchoolClass(10,'b');
-        SchoolClass schoolClass1c = new SchoolClass(10,'c');
+        log.debug("Start to filling database");
+        // Create school classes
+        log.debug("Create school classes");
+        SchoolClassDTO schoolClassDTO1a = new SchoolClassDTO(1,'a');
+        SchoolClass schoolClass1b = new SchoolClass(1,'b');
+        SchoolClass schoolClass1c = new SchoolClass(1,'c');
         // create students
+        log.debug("Create students");
         Student student1a_1 = new Student("Dima", "Sharovskiy"*//*,schoolClass1a*//*);
         Student student1a_2 = new Student("Anna", "Parkhomenko"*//*,schoolClass1a*//*);
         Student student1b_1 = new Student("Anton", "Solyanik"*//*,schoolClass1b*//*);
@@ -63,7 +72,7 @@ public class SchoolBookController {
         schoolClass1c.getStudents().add(student1c_2);
         schoolClass1c.getStudents().add(student1c_3);
         // save students
-        *//*studentRepo.save(student1a_1);
+        studentRepo.save(student1a_1);
         studentRepo.save(student1a_2);
         studentRepo.save(student1b_1);
         studentRepo.save(student1b_2);
@@ -104,7 +113,7 @@ public class SchoolBookController {
         gradeRepo.save(grade8);
 
     }
-    *//*
+    /*
     Function call fillDatabase()
      *//*
     @GetMapping("/init-db")

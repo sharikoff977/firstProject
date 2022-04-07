@@ -32,6 +32,8 @@ public interface StudentFacade {
      * */
     Optional<StudentDTO> findOne(Long id);
 
+    /*List<StudentDTO> findAllBySchoolClassId(Long id);*/
+
     /**
      * Delete "id" student.
      *
