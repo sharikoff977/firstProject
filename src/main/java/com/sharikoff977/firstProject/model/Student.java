@@ -26,7 +26,7 @@ public class Student implements Serializable {
 
     private String lastName; // student's last name
     @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn
+    @JoinColumn
     private SchoolClass schoolClass; // student's school class
 
     /*public Student(String firstName, String lastName*//*, SchoolClass schoolClass*//*) {
