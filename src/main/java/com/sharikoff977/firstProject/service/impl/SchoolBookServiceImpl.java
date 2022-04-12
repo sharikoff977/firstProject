@@ -40,100 +40,41 @@ public class SchoolBookServiceImpl implements SchoolBookService {
     private final SubjectRepo subjectRepo;
 
     public SchoolBookDTO getSchoolBook(String className) {
-
         SchoolClass schoolClass = schoolClassRepo.findByName(className);
 
         SchoolBookDTO schoolBookDTO = new SchoolBookDTO();
         schoolBookDTO.setSchoolClassDTO(schoolClassMapper.toDTO(schoolClass));
-        List<SbSubjectDTO> sbSubjectDTOList = new ArrayList<>();
+        schoolBookDTO.setSbSubjectDTOs(new ArrayList<>());
 
-        Map<Long, SbSubjectDTO> sbSubjectDTOSbStudentGradeDTOMap = new HashMap<>();
+        Map<Long, SbSubjectDTO> subjectMap = new HashMap<>();
 
-        for(Student student : schoolClass.getStudents()){
+        for (Student student : schoolClass.getStudents()) {
             StudentDTO studentDTO = studentMapper.toDto(student);
-            SbStudentGradeDTO sbStudentGradeDTO = new SbStudentGradeDTO();
-            sbStudentGradeDTO.setStudentDTO(studentDTO);
-
+            Map<Subject, SbStudentGradeDTO>  subjectGradeMap = new HashMap<>();
             for (Grade grade : gradeRepo.findAllByStudent(student)) {
-                SbSubjectDTO sbSubjectDTO = sbSubjectDTOSbStudentGradeDTOMap.get(grade.getSubject().getId());
-                if (sbSubjectDTO == null) {
-                    sbSubjectDTO = new SbSubjectDTO();
-                    sbSubjectDTO.setSubjectDTO(subjectMapper.toDto(grade.getSubject()));
+               SbStudentGradeDTO studentGrades = subjectGradeMap.get(grade.getSubject()); // Оценки этого студента по текущему предмету
+               if (studentGrades == null) {
+                   // По этому предмету у студента еще нет оценок,
+                   studentGrades = new SbStudentGradeDTO();
+                   studentGrades.setStudentDTO(studentDTO);
+                   studentGrades.setGradeDTOs(new ArrayList<>());
+                   subjectGradeMap.put(grade.getSubject(), studentGrades);
 
-                    List<SbStudentGradeDTO> sbStudentGradeDTOList = new ArrayList<>();
-                    sbSubjectDTO.setSbStudentGradeDTOs(sbStudentGradeDTOList);
-
-
-                    List<GradeDTO> gradeDTOList = new ArrayList<>();
-                    sbStudentGradeDTO.setGradeDTOs(gradeDTOList);
-
-                    sbStudentGradeDTOList.add(sbStudentGradeDTO);
-                }
-
-
-                sbStudentGradeDTOList.get().add(gradeMapper.toDTO(grade));
-
-
-                List<SbSubjectDTO> sbSubjectDTOList = schoolBookDTO.getSbSubjectDTOs();
-
-                if (!schoolBookDTO.getSbSubjectDTOs().contains(subjectDTO)){
-
-                    SbSubjectDTO sbSubjectDTO = new SbSubjectDTO();
-                    sbSubjectDTO.setSubjectDTO(subjectDTO);
-
-                    List<SbStudentGradeDTO> sbStudentGradeDTOList = new ArrayList<>();
-                    sbSubjectDTO.setSbStudentGradeDTOs(sbStudentGradeDTOList);
-
-                    schoolBookDTO.getSbSubjectDTOs().add(sbSubjectDTO);
-                }
-
-                List<SbSubjectDTO> sbSubjectDTOList1  = schoolBookDTO.getSbSubjectDTOs();
-                List<SbStudentGradeDTO> sbStudentGradeDTOList = sbSubjectDTOList1.get()
+                   SbSubjectDTO subjectDTO = subjectMap.get(grade.getSubject().getId()); // Уже могут быть оценки по предмету у других студентов
+                   if (subjectDTO == null) {
+                       // Такой предмет еще не попадался, нужно создать страницу в журнале
+                       subjectDTO = new SbSubjectDTO();
+                       subjectDTO.setSubjectDTO(subjectMapper.toDto(grade.getSubject()));
+                       subjectDTO.setSbStudentGradeDTOs(new ArrayList<>());
+                       subjectMap.put(grade.getSubject().getId(), subjectDTO);// это только для быстрого поиска
+                       // добавляем предмет в журнал
+                       schoolBookDTO.getSbSubjectDTOs().add(subjectDTO);
+                   }
+                   subjectDTO.getSbStudentGradeDTOs().add(studentGrades);
+               }
+               studentGrades.getGradeDTOs().add(gradeMapper.toDTO(grade));
             }
-
         }
-
-        //Create SchoolBookDTO {SchoolClassDTO, List<SbSubjectDTO>}
-        /*SchoolClass schoolClass = schoolClassRepo.findByName(className);
-
-        Set<Student> students = schoolClass.getStudents();
-        List<Grade> grades = new ArrayList<>();
-        Set<Subject> subjects = new HashSet<>();
-
-        for (Student student : students){
-            List<Grade> grades1 = gradeRepo.findAllByStudent(student);
-            for (Grade grade : grades1){
-                subjects.add(grade.getSubject());
-            }
-            grades.addAll(grades1);
-        }
-
-        SchoolBookDTO schoolBookDTO = new SchoolBookDTO();
-        schoolBookDTO.setSchoolClassDTO(schoolClassMapper.toDTO(schoolClass));
-        List<SbSubjectDTO> sbSubjectDTOS = new ArrayList<>();
-
-        for (Subject st : subjects) {
-            //Create SbSubjectDTO {SubjectDTO, List<SbStudentGradeDTO>}
-            SbSubjectDTO sbSubjectDTO = new SbSubjectDTO();
-            sbSubjectDTO.setSubjectDTO(subjectMapper.toDto(st));
-            List<SbStudentGradeDTO> sbStudentGradeDTOs = new ArrayList<>();
-            for (Student s : students) {
-                //Create SbStudentGradeDTO {StudentDTO, List<GradeDTO>}
-                SbStudentGradeDTO sbStudentGradeDTO = new SbStudentGradeDTO();
-                sbStudentGradeDTO.setStudentDTO(studentMapper.toDto(s));
-                List<GradeDTO> gradesDTOs = new ArrayList<>();
-                for (Grade g : grades) {
-                    if(g.getStudent().equals(s) && g.getSubject().equals(st)){
-                        gradesDTOs.add(gradeMapper.toDTO(g));
-                    }
-                }
-                sbStudentGradeDTO.setGradeDTOs(gradesDTOs);
-                sbStudentGradeDTOs.add(sbStudentGradeDTO);
-            }
-            sbSubjectDTO.setSbStudentGradeDTOs(sbStudentGradeDTOs);
-            sbSubjectDTOS.add(sbSubjectDTO);
-        }
-        schoolBookDTO.setSbSubjectDTOs(sbSubjectDTOS);
-        return schoolBookDTO;*/
+        return schoolBookDTO;
     }
 }
