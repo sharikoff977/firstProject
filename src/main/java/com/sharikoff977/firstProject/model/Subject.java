@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,7 +18,6 @@ public class Subject {
     private Long id; // subject id
     private String title; // subject's title
 
-    /*public Subject(String title) {
-        this.title = title;
-    }*/
+    /*@ManyToMany
+    private Set<SchoolClass> schoolClasses = new HashSet<>();*/
 }

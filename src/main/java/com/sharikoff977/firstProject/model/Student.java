@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
 Class Student
@@ -25,9 +27,14 @@ public class Student implements Serializable {
     private String firstName; // student's name
 
     private String lastName; // student's last name
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private SchoolClass schoolClass; // student's school class
+    @Column(name = "school_class_id")
+    private Long schoolClassId;
+    //@ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn()
+    //private SchoolClass schoolClass; // student's school class
+
+    /*JoinColumn
+    private Set<Grade> grades;*/
 
     /*public Student(String firstName, String lastName*//*, SchoolClass schoolClass*//*) {
         this.firstName = firstName;

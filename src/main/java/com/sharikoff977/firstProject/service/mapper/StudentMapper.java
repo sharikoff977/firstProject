@@ -12,12 +12,10 @@ import org.mapstruct.Named;
  * */
 @Mapper(uses = {SchoolClassMapper.class}, componentModel = "spring")
 public interface StudentMapper extends EntityMapper<StudentDTO, Student>{
-    @Mapping(source = "schoolClass.id", target = "schoolClassId")
-    @Mapping(source = "schoolClass.number", target = "schoolClassNumber")
-    @Mapping(source = "schoolClass.letter", target = "schoolClassLetter")
+    @Mapping(source = "schoolClassId", target = "schoolClassId")
     StudentDTO toDto(Student student);
 
-    @Mapping(source = "schoolClassId", target = "schoolClass"/*, qualifiedByName = "someMethod"*/)
+    @Mapping(source = "schoolClassId", target = "schoolClassId"/*, qualifiedByName = "someMethod"*/)
     Student toEntity(StudentDTO studentDTO);
 
     /*@Named("someMethod")

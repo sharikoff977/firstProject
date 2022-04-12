@@ -22,19 +22,19 @@ public class SchoolClass implements Serializable {
 
     private int number; // class number
 
-    private char letter; // class letter
+    private String letter; // class letter
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "school_class_id")
     //@OneToMany(mappedBy = "schoolClass")
     private Set<Student> students = new HashSet<>(); // list of student's in the class
 
-    /*public SchoolClass(int number, char letter) {
-        this.number = number;
-        this.letter = letter;
-    }
+    /*@ManyToMany
+    @JoinTable(name = "school_class_subjects",
+            joinColumns = @JoinColumn(name = "school_class_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "subjects_id", referencedColumnName = "id"))
+    private Set<Subject> subjects = new HashSet<>();*/
 
-    public SchoolClass() {
-
-    }*/
+    /*@OneToMany
+    private Set<Subject> subjects = new HashSet<>();*/
 }

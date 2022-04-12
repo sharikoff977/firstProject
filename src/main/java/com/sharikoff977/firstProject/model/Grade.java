@@ -19,10 +19,8 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // id grade
     @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn
     private Subject subject; // subject
     @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn
     private Student student; // student grade
     private int value; // value grade
     private ZonedDateTime dateTime; // date grade
