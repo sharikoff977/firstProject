@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class SbSubjectDTO {
 
-    private SubjectDTO subjectDTO;
-    private List<SbStudentGradeDTO> sbStudentGradeDTOs;
+    private SubjectDTO subject;
+    private List<SbStudentGradeDTO> studentGrades;
 
 }

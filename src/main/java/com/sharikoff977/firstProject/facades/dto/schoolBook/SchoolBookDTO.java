@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 public class SchoolBookDTO {
 
-    private SchoolClassDTO schoolClassDTO;
-    private List<SbSubjectDTO> sbSubjectDTOs;
+    private SchoolClassDTO schoolClass;
+    private List<SbSubjectDTO> subjects;
 
 }

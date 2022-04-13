@@ -8,7 +8,6 @@ import java.util.List;
 @Data
 public class SbStudentGradeDTO {
 
-    private StudentDTO studentDTO;
-    private List<GradeDTO> gradeDTOs;
-
+    private StudentDTO student;
+    private List<GradeDTO> grades;
 }

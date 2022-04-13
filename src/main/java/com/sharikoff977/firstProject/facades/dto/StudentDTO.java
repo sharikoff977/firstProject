@@ -11,6 +11,6 @@ public class StudentDTO {
     private String firstName;
     private String lastName;
     private Long schoolClassId;
-    private Integer schoolClassNumber;
-    private String schoolClassLetter;
+    //private Integer schoolClassNumber;
+    //private String schoolClassLetter;
 }
