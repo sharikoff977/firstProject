@@ -4,6 +4,7 @@ import com.sharikoff977.firstProject.facades.dto.SchoolClassDTO;
 import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.model.SchoolClass;
 import com.sharikoff977.firstProject.model.Student;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 /**
@@ -16,7 +17,7 @@ public interface SchoolClassMapper extends EntityMapper<SchoolClassDTO, SchoolCl
 
     @Mapping(target = "students", ignore = true)
     SchoolClass toEntity(SchoolClassDTO schoolClassDTO);
-    SchoolClassDTO toDTO(SchoolClass schoolClass);
+    List<SchoolClassDTO> toDTO(List<SchoolClass> schoolClass);
 
     default SchoolClass fromId(Long id) {
         if (id == null) {

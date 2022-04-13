@@ -39,7 +39,7 @@ public class SchoolBookServiceImpl implements SchoolBookService {
         SchoolClass schoolClass = schoolClassRepo.findByName(className);
 
         SchoolBookDTO schoolBookDTO = new SchoolBookDTO();
-        schoolBookDTO.setSchoolClass(schoolClassMapper.toDTO(schoolClass));
+        schoolBookDTO.setSchoolClass(schoolClassMapper.toDto(schoolClass));
         schoolBookDTO.setSubjects(new ArrayList<>());
 
         Map<Long, SbSubjectDTO> subjectMap = new HashMap<>();

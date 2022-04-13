@@ -1,0 +1,20 @@
+<div style="margin:1em;" th:fragment="schoolBookTemplate(schoolBook, maxGradesCount)" xmlns:th="http://www.w3.org/1999/xhtml">
+  <h2 th:text="${schoolBook.subject.title}"></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col" th:each="i: ${#numbers.sequence(0, maxGradesCount - 1)}" th:text="${i + 1}">1</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="studentGrade,i : ${schoolBook.studentGrades}">
+      <th scope="row" th:text="${i.index + 1}">1</th>
+      <td th:text="${studentGrade.student.firstName + ' ' + studentGrade.student.lastName}">Mark</td>
+      <td th:each="grade : ${studentGrade.grades}" th:text="${grade.value}">11</td>
+      <td th:each="i: ${#numbers.sequence(0, maxGradesCount - studentGrade.grades.size)}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

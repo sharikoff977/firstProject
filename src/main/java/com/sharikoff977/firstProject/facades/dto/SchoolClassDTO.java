@@ -11,5 +11,5 @@ import java.io.Serializable;
 public class SchoolClassDTO implements Serializable {
     private Long id;
     private int number;
-    private char letter;
+    private String letter;
 }

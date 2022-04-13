@@ -29,19 +29,19 @@ public class SchoolClassFacadeImpl implements SchoolClassFacade {
         log.debug("Request to save Article : {}", schoolClassDTO);
         SchoolClass schoolClass = schoolClassMapper.toEntity(schoolClassDTO);
         schoolClass = schoolClassService.save(schoolClass);
-        return schoolClassMapper.toDTO(schoolClass);
+        return schoolClassMapper.toDto(schoolClass);
     }
 
     @Override
     public List<SchoolClassDTO> findAll() {
         log.debug("Request to get all Articles");
-        return schoolClassService.findAll().stream().map(schoolClassMapper::toDTO).collect(Collectors.toList());
+        return schoolClassService.findAll().stream().map(schoolClassMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
     public Optional<SchoolClassDTO> findOne(Long id) {
         log.debug("Request to get Article : {}", id);
-        return schoolClassService.findOne(id).map(schoolClassMapper::toDTO);
+        return schoolClassService.findOne(id).map(schoolClassMapper::toDto);
     }
 
     @Override

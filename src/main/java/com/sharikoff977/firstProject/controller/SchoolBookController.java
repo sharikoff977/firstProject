@@ -1,35 +1,39 @@
 package com.sharikoff977.firstProject.controller;
 
-import com.sharikoff977.firstProject.facades.SchoolClassFacade;
-import com.sharikoff977.firstProject.facades.dto.SchoolClassDTO;
-import com.sharikoff977.firstProject.model.Grade;
-import com.sharikoff977.firstProject.model.SchoolClass;
-import com.sharikoff977.firstProject.model.Subject;
-import com.sharikoff977.firstProject.repo.GradeRepo;
-import com.sharikoff977.firstProject.repo.SchoolClassRepo;
-import com.sharikoff977.firstProject.repo.StudentRepo;
-import com.sharikoff977.firstProject.model.Student;
-import com.sharikoff977.firstProject.repo.SubjectRepo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sharikoff977.firstProject.facades.dto.schoolBook.SbStudentGradeDTO;
+import com.sharikoff977.firstProject.facades.dto.schoolBook.SbSubjectDTO;
+import com.sharikoff977.firstProject.facades.dto.schoolBook.SchoolBookDTO;
+import com.sharikoff977.firstProject.service.SchoolBookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class SchoolBookController {
 
+  @Autowired
+  private SchoolBookService schoolBookService;
+
+  @GetMapping("school-book/{clazz}")
+  public ModelAndView getSchoolBook(@PathVariable("clazz") String clazz) throws JsonProcessingException {
+    SchoolBookDTO schoolBook = schoolBookService.getSchoolBook(clazz);
+    Integer maxGradesCount = schoolBook.getSubjects().stream()
+        .map(SbSubjectDTO::getStudentGrades)
+        .flatMap(List::stream)
+        .map(SbStudentGradeDTO::getGrades)
+        .map(List::size)
+        .max(Integer::compareTo).orElse(0);
+    return new ModelAndView("index", Map.of(
+        "schoolBook", schoolBook,
+        "maxGradesCount", maxGradesCount));
+  }
     /*@Autowired
     StudentRepo studentRepo;
     @Autowired
