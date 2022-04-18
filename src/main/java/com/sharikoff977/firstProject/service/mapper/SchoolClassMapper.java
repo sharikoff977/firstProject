@@ -17,7 +17,7 @@ public interface SchoolClassMapper extends EntityMapper<SchoolClassDTO, SchoolCl
 
     @Mapping(target = "students", ignore = true)
     SchoolClass toEntity(SchoolClassDTO schoolClassDTO);
-    List<SchoolClassDTO> toDTO(List<SchoolClass> schoolClass);
+    List<SchoolClassDTO> toDto(List<SchoolClass> schoolClass);
 
     default SchoolClass fromId(Long id) {
         if (id == null) {

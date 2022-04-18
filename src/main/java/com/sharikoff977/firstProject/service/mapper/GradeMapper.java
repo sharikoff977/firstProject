@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 public interface GradeMapper {
     @Mapping(source = "subject.id", target = "subjectId")
     @Mapping(source = "student.id", target = "studentId")
-    GradeDTO toDTO(Grade grade);
+    GradeDTO toDto(Grade grade);
 
     @Mapping(source = "subjectId", target = "subject")
     @Mapping(source = "studentId", target = "student")

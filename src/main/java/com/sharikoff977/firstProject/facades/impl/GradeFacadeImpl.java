@@ -25,14 +25,14 @@ public class GradeFacadeImpl implements GradeFacade {
     public GradeDTO save(GradeDTO gradeDTO) {
         Grade grade = gradeMapper.toEntity(gradeDTO);
         grade = gradeService.save(grade);
-        return gradeMapper.toDTO(grade);
+        return gradeMapper.toDto(grade);
     }
 
     @Override
     public List<GradeDTO> findAll() {
         List<GradeDTO> result = new ArrayList<>();
         for (Grade grade : gradeService.findAll()) {
-            GradeDTO gradeDTO = gradeMapper.toDTO(grade);
+            GradeDTO gradeDTO = gradeMapper.toDto(grade);
             result.add(gradeDTO);
         }
         return result;
@@ -41,7 +41,7 @@ public class GradeFacadeImpl implements GradeFacade {
     @Override
     public Optional<GradeDTO> findOne(Long id) {
         Grade grade = gradeService.findOne(id).get();
-        GradeDTO gradeDTO = gradeMapper.toDTO(grade);
+        GradeDTO gradeDTO = gradeMapper.toDto(grade);
         return Optional.of(gradeDTO);
     }
 

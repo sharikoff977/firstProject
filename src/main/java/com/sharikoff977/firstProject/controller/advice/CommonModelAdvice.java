@@ -20,6 +20,6 @@ public class CommonModelAdvice {
 
     @ModelAttribute("classes")
     public List<SchoolClassDTO> schoolClasses() {
-      return schoolClassMapper.toDTO(schoolClassService.findAll());
+      return schoolClassMapper.toDto(schoolClassService.findAll());
     }
 }
