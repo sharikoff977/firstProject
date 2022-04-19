@@ -13,9 +13,7 @@
 <div th:replace="fragments/navbar.html :: navbarTemplate(${classes})"/>
 <div style="margin: 1em;" th:if="${schoolBook}">
   <h5 th:text="${schoolBook.schoolClass.number + '-' + schoolBook.schoolClass.letter.toUpperCase()}"></h5>
-  <div th:each="subject : ${schoolBook.subjects}">
-    <div th:replace="fragments/schoolBook.html :: schoolBookTemplate(${subject})"/>
-  </div>
+  <div th:replace="fragments/schoolBook.html :: schoolBookTemplate(${schoolBook})"/>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

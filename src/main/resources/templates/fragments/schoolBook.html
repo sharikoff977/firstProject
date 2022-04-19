@@ -1,20 +1,27 @@
 <div style="margin:1em;" th:fragment="schoolBookTemplate(schoolBook)" xmlns:th="http://www.w3.org/1999/xhtml">
-  <h2 th:text="${schoolBook.subject.title}"></h2>
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col" th:each="schedule : ${schoolBook.schedules}" th:text="${T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy').format(schedule)}">12.01.2021</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="studentGrade,i : ${schoolBook.studentGrades}">
-      <th scope="row" th:text="${i.index + 1}">1</th>
-      <td th:text="${studentGrade.student.firstName + ' ' + studentGrade.student.lastName}">Mark</td>
-<!--      <td th:each="grade : ${studentGrade.grades}" th:text="${grade.value}">11</td>-->
-      <td th:each="schedule : ${schoolBook.schedules}" th:text="${studentGrade.grades.get(schedule)}">11</td>
-    </tr>
-    </tbody>
-  </table>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button th:each="subject, i : ${schoolBook.subjects}" th:text="${subject.subject.title}" class="nav-link" th:classappend="${i.first ? 'active' : ''}" th:id="'nav-' + ${subject.subject.id} + '-tab'" data-bs-toggle="tab" th:data-bs-target="'#nav-' + ${subject.subject.id}" type="button" role="tab" th:aria-controls="'#nav-' + ${subject.subject.id}" th:aria-selected="${i.first}">Mathematics</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div th:each="subject, i : ${schoolBook.subjects}" class="tab-pane fade" th:classappend="${i.first ? 'show active' : ''}" th:id="'nav-' + ${subject.subject.id}" role="tabpanel" tharia-labelledby="'nav-' + ${subject.subject.id} + '-tab'">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col" th:each="schedule : ${subject.schedules}" th:text="${T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy').format(schedule)}">12.01.2021</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="studentGrade,i : ${subject.studentGrades}">
+          <th scope="row" th:text="${i.index + 1}">1</th>
+          <td th:text="${studentGrade.student.firstName + ' ' + studentGrade.student.lastName}">Mark</td>
+          <td th:each="schedule : ${subject.schedules}" th:text="${studentGrade.grades.get(schedule)}">11</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
