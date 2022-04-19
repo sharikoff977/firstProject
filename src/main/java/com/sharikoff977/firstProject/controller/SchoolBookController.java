@@ -1,6 +1,8 @@
 package com.sharikoff977.firstProject.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sharikoff977.firstProject.facades.dto.ScheduleDTO;
+import com.sharikoff977.firstProject.facades.dto.SubjectDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbStudentGradeDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbSubjectDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SchoolBookDTO;
@@ -10,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,15 +27,20 @@ public class SchoolBookController {
   @GetMapping("school-book/{clazz}")
   public ModelAndView getSchoolBook(@PathVariable("clazz") String clazz) throws JsonProcessingException {
     SchoolBookDTO schoolBook = schoolBookService.getSchoolBook(clazz);
-    Integer maxGradesCount = schoolBook.getSubjects().stream()
+    /*Integer maxGradesCount = schoolBook.getSubjects().stream()
         .map(SbSubjectDTO::getStudentGrades)
         .flatMap(List::stream)
         .map(SbStudentGradeDTO::getGrades)
         .map(List::size)
-        .max(Integer::compareTo).orElse(0);
+        .max(Integer::compareTo).orElse(0);*/
+    Map<SubjectDTO, List<ZonedDateTime>> subjectSchedulesMap = new HashMap<>();
+    for (SbSubjectDTO subject : schoolBook.getSubjects()){
+      subjectSchedulesMap.put(subject.getSubject(), subject.getSchedules());
+    }
     return new ModelAndView("index", Map.of(
         "schoolBook", schoolBook,
-        "maxGradesCount", maxGradesCount));
+        "subjectSchedulesMap", subjectSchedulesMap/*,
+        "maxGradesCount", maxGradesCount*/));
   }
     /*@Autowired
     StudentRepo studentRepo;

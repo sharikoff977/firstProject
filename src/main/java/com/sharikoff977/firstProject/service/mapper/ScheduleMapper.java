@@ -5,6 +5,8 @@ import com.sharikoff977.firstProject.model.Schedule;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.time.ZonedDateTime;
+
 @Mapper(componentModel = "spring", uses = {SchoolClassMapper.class, SubjectMapper.class})
 public interface ScheduleMapper {
 

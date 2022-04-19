@@ -1,26 +1,25 @@
 package com.sharikoff977.firstProject.service.impl;
 
+import com.sharikoff977.firstProject.facades.dto.ScheduleDTO;
 import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbStudentGradeDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbSubjectDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SchoolBookDTO;
-import com.sharikoff977.firstProject.model.Grade;
-import com.sharikoff977.firstProject.model.SchoolClass;
-import com.sharikoff977.firstProject.model.Subject;
+import com.sharikoff977.firstProject.model.*;
 import com.sharikoff977.firstProject.repo.GradeRepo;
+import com.sharikoff977.firstProject.repo.ScheduleRepo;
 import com.sharikoff977.firstProject.repo.SchoolClassRepo;
-import com.sharikoff977.firstProject.model.Student;
 import com.sharikoff977.firstProject.repo.SubjectRepo;
 import com.sharikoff977.firstProject.service.SchoolBookService;
-import com.sharikoff977.firstProject.service.mapper.GradeMapper;
-import com.sharikoff977.firstProject.service.mapper.SchoolClassMapper;
-import com.sharikoff977.firstProject.service.mapper.StudentMapper;
-import com.sharikoff977.firstProject.service.mapper.SubjectMapper;
+import com.sharikoff977.firstProject.service.mapper.*;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +33,8 @@ public class SchoolBookServiceImpl implements SchoolBookService {
     private final GradeMapper gradeMapper;
     private final SubjectMapper subjectMapper;
     private final SubjectRepo subjectRepo;
+    private final ScheduleRepo scheduleRepo;
+    private final ScheduleMapper scheduleMapper;
 
     public SchoolBookDTO getSchoolBook(String className) {
         /*SchoolClass schoolClass = schoolClassRepo.findByName(className); // Поиск нужного класса
@@ -86,6 +87,17 @@ public class SchoolBookServiceImpl implements SchoolBookService {
         schoolBookDTO.setSchoolClass(schoolClassMapper.toDto(schoolClass));
         schoolBookDTO.setSubjects(new ArrayList<>());
 
+        List<Schedule> schedules = scheduleRepo.findAllBySchoolClassId(schoolClass.getId());
+        /*Map<Long, Map<ZonedDateTime, Integer>> subjectMapMap = new HashMap<>();
+        for (Schedule schedule : schedules){
+            Map<ZonedDateTime, Integer> zonedDateTimeIntegerMap = subjectMapMap.get(schedule.getSubjectId());
+            if (zonedDateTimeIntegerMap == null){
+                zonedDateTimeIntegerMap = new HashMap<>();
+                subjectMapMap.put(schedule.getSubjectId(), zonedDateTimeIntegerMap);
+            }
+            zonedDateTimeIntegerMap.put(schedule.getDate(), null);
+        }*/
+
         Map<Long, SbSubjectDTO> subjectMap = new HashMap<>();
 
         for(Student student : schoolClass.getStudents()){
@@ -101,7 +113,9 @@ public class SchoolBookServiceImpl implements SchoolBookService {
 
                     studentGrades = new SbStudentGradeDTO();
                     studentGrades.setStudent(studentDTO);
-                    studentGrades.setGrades(new ArrayList<>());
+                    //Map<ZonedDateTime, Integer> scheduleGrades = subjectMapMap.get(grade.getSubject().getId());
+                    studentGrades.setGrades(new HashMap<>(/*scheduleGrades*/));
+
                     subjectGradeMap.put(grade.getSubject(), studentGrades);
 
                     SbSubjectDTO subjectDTO = subjectMap.get(grade.getSubject().getId());
@@ -111,10 +125,13 @@ public class SchoolBookServiceImpl implements SchoolBookService {
                         subjectDTO.setStudentGrades(new ArrayList<>());
                         subjectMap.put(grade.getSubject().getId(), subjectDTO);
                         schoolBookDTO.getSubjects().add(subjectDTO);
+                        subjectDTO.setSchedules(scheduleRepo.findAllBySchoolClassIdAndSubjectId(schoolClass.getId(),
+                                subjectDTO.getSubject().getId())
+                                .stream().map(Schedule::getDate).collect(Collectors.toList()));
                     }
                     subjectDTO.getStudentGrades().add(studentGrades);
                 }
-                studentGrades.getGrades().add(gradeMapper.toDto(grade));
+                studentGrades.getGrades().put(grade.getDateTime(), grade.getValue());
             }
 
         }
