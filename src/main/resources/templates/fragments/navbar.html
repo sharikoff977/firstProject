@@ -14,7 +14,9 @@
               School Book
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" th:href="${'/school-book/' + clazz.number + clazz.letter}" th:each="clazz : ${classes}" th:text="${clazz.number + '-' + clazz.letter.toUpperCase()}">10a</a></li>
+              <li>
+                <a class="dropdown-item" th:href="${'/school-book/' + clazz.number + clazz.letter}" th:each="clazz : ${classes}" th:text="${clazz.number + '-' + clazz.letter.toUpperCase()}">10a</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

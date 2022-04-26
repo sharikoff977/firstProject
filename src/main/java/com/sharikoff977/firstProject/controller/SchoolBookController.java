@@ -24,8 +24,8 @@ public class SchoolBookController {
   @Autowired
   private SchoolBookService schoolBookService;
 
-  @GetMapping("school-book/{clazz}")
-  public ModelAndView getSchoolBook(@PathVariable("clazz") String clazz) throws JsonProcessingException {
+  @GetMapping("/api/school-book/{clazz}")
+  public SchoolBookDTO getSchoolBook(@PathVariable("clazz") String clazz) throws JsonProcessingException {
     SchoolBookDTO schoolBook = schoolBookService.getSchoolBook(clazz);
     /*Integer maxGradesCount = schoolBook.getSubjects().stream()
         .map(SbSubjectDTO::getStudentGrades)
@@ -37,10 +37,7 @@ public class SchoolBookController {
     for (SbSubjectDTO subject : schoolBook.getSubjects()){
       subjectSchedulesMap.put(subject.getSubject(), subject.getSchedules());
     }
-    return new ModelAndView("index", Map.of(
-        "schoolBook", schoolBook,
-        "subjectSchedulesMap", subjectSchedulesMap/*,
-        "maxGradesCount", maxGradesCount*/));
+    return schoolBook;
   }
     /*@Autowired
     StudentRepo studentRepo;
