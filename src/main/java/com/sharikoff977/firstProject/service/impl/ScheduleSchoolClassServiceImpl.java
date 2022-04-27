@@ -36,7 +36,6 @@ public class ScheduleSchoolClassServiceImpl {
         SchoolClass schoolClass = schoolClassRepo.findByName(className);
         scheduleSchoolClassDTO.setSchoolClassId(schoolClass.getId());
         List<DayOfWeekDTO> days = new ArrayList<>();
-        scheduleSchoolClassDTO.setDays(days);
 
         List<Schedule> schedules = scheduleRepo.findAllBySchoolClassId(schoolClass.getId());
 
@@ -45,19 +44,20 @@ public class ScheduleSchoolClassServiceImpl {
         for (Schedule schedule : schedules){
 
             LessonDTO lesson = new LessonDTO();
-            lesson.setTime(schedule.getLesson().getLesson());
+            lesson.setTime(schedule.getLesson().getTimeOfLesson());
             lesson.setSubjectTitle(subjectRepo.getById(schedule.getSubjectId()).getTitle());
             lesson.setTeacherName(teacherRepo.getById(schedule.getTeacherId()).getName());
             lesson.setRoomNumber(schoolRoomRepo.getById(schedule.getSchoolRoomId()).getNumber());
 
-            DayOfWeekDTO day = dowMap.get(schedule.getDay().getValue());
+            DayOfWeekDTO day = dowMap.get(schedule.getDayOfWeek().getValue());
             if (day == null){
                 day = new DayOfWeekDTO();
-                day.setDay(schedule.getDay());
-                dowMap.put(schedule.getDay().getValue(), day);
+                day.setDay(schedule.getDayOfWeek());
+                dowMap.put(schedule.getDayOfWeek().getValue(), day);
+                days.add(day);
             }
-            List<LessonDTO> lessons = day.getLessons();
-            lessons.add(lesson);
+            //List<LessonDTO> lessons = day.getLessons();
+            day.getLessons().add(lesson);
 
         }
 

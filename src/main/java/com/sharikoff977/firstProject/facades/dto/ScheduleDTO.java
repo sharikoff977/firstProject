@@ -15,6 +15,7 @@ public class ScheduleDTO {
     private Long subjectId;
     private Long teacherId;
     private Long schoolRoomId;
-    private DayOfWeek day;
-    private LocalTime time;
+    private ZonedDateTime date;
+    private DayOfWeek dayOfWeek;
+    private Long lessonId;
 }

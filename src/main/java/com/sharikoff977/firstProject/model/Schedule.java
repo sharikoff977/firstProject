@@ -1,7 +1,5 @@
 package com.sharikoff977.firstProject.model;
 
-import com.sharikoff977.firstProject.model.enumeration.DayOfWeekEnum;
-import com.sharikoff977.firstProject.model.enumeration.LessonEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,11 +28,14 @@ public class Schedule {
     @Column(name = "school_room_id")
     private Long schoolRoomId;
 
-    @Column(name = "day")
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek day;
+    @Column(name = "date")
+    private ZonedDateTime date;
 
-    @Column(name = "lesson")
-    private LessonEnum lesson;
+    @Column(name = "day_of_week")
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek dayOfWeek;
+
+    @OneToOne
+    private Lesson lesson;
 
 }

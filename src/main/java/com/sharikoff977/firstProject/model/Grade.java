@@ -19,9 +19,9 @@ public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // id grade
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Subject subject; // subject
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Student student; // student grade
 
     private int value; // value grade

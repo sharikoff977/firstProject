@@ -52,7 +52,26 @@ INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (1
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (154, '2022-03-02', 11, 10, 16);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (155, '2022-03-03', 10, 11, 16);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (156, '2022-03-04', 9, 12, 16);
-INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (49, '2022-03-01', 1, 13);
+
+INSERT INTO public.teacher(id, name) VALUES (157, 'Anna Parkhomenko');
+INSERT INTO public.teacher(id, name) VALUES (158, 'Marina Sharovskaya');
+INSERT INTO public.teacher(id, name) VALUES (159, 'Lena Holovach');
+INSERT INTO public.teacher(id, name) VALUES (160, 'Shimon Peres');
+
+INSERT INTO public.school_room(id, "number") VALUES (161, 100);
+INSERT INTO public.school_room(id, "number") VALUES (162, 200);
+INSERT INTO public.school_room(id, "number") VALUES (163, 300);
+INSERT INTO public.school_room(id, "number") VALUES (164, 400);
+
+INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (165, 1, '08:00:00');
+INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (166, 2, '09:00:00');
+INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (167, 3, '10:00:00');
+INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (168, 4, '11:00:00');
+INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (169, 5, '12:00:00');
+INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (170, 6, '13:00:00');
+
+INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (49, '2022-03-01', 1, 13, 'Monday', 161, 157, 165);
+INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (50, '2022-03-02', 1, 13, 'Monday', 161, 157, 165);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (50, '2022-03-02', 1, 13);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (51, '2022-03-03', 1, 13);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (52, '2022-03-04', 1, 13);
