@@ -2,6 +2,9 @@ package com.sharikoff977.firstProject.facades.dto;
 
 import lombok.Data;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -10,5 +13,8 @@ public class ScheduleDTO {
     private Long id;
     private Long schoolClassId;
     private Long subjectId;
-    private ZonedDateTime date;
+    private Long teacherId;
+    private Long schoolRoomId;
+    private DayOfWeek day;
+    private LocalTime time;
 }

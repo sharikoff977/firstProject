@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -22,6 +23,7 @@ public class Grade {
     private Subject subject; // subject
     @ManyToOne(cascade = CascadeType.ALL)
     private Student student; // student grade
+
     private int value; // value grade
     private ZonedDateTime dateTime; // date grade
 

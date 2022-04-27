@@ -1,6 +1,6 @@
 package com.sharikoff977.firstProject.service.impl;
 
-import com.sharikoff977.firstProject.facades.dto.ScheduleDTO;
+import com.sharikoff977.firstProject.facades.dto.schoolBook.SbGradeIdValueDTO;
 import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbStudentGradeDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbSubjectDTO;
@@ -13,11 +13,9 @@ import com.sharikoff977.firstProject.repo.SubjectRepo;
 import com.sharikoff977.firstProject.service.SchoolBookService;
 import com.sharikoff977.firstProject.service.mapper.*;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -131,7 +129,10 @@ public class SchoolBookServiceImpl implements SchoolBookService {
                     }
                     subjectDTO.getStudentGrades().add(studentGrades);
                 }
-                studentGrades.getGrades().put(grade.getDateTime(), grade.getValue());
+                SbGradeIdValueDTO sbGradeIdValueDTO = new SbGradeIdValueDTO();
+                sbGradeIdValueDTO.setId(grade.getId());
+                sbGradeIdValueDTO.setValue(grade.getValue());
+                studentGrades.getGrades().put(grade.getDateTime(), sbGradeIdValueDTO);
             }
 
         }

@@ -16,4 +16,6 @@ public interface ScheduleService {
 
      void delete(Long id);
 
+     List<ScheduleDTO> findBySchoolClassName(String name);
+
 }

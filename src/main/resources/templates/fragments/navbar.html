@@ -19,9 +19,20 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              School Schedule
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" th:href="${'/schedule/class-name/' + clazz.number + clazz.letter}" th:each="clazz : ${classes}" th:text="${clazz.number + '-' + clazz.letter.toUpperCase()}">10a</a></li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/swagger-ui/index.html">Swagger</a>
           </li>
+
         </ul>
       </div>
     </div>

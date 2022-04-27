@@ -18,7 +18,15 @@
         <tr th:each="studentGrade,i : ${subject.studentGrades}">
           <th scope="row" th:text="${i.index + 1}">1</th>
           <td th:text="${studentGrade.student.firstName + ' ' + studentGrade.student.lastName}">Mark</td>
-          <td th:each="schedule : ${subject.schedules}" th:text="${studentGrade.grades.get(schedule)}">11</td>
+          <td th:each="schedule : ${subject.schedules}" >
+            <form id="form-grade" action="#" th:subject-id="${subject.subject.id}"
+                  th:student-id="${studentGrade.student.id}"
+                  th:grade-id="${studentGrade.grades.get(schedule)?.id}"
+                  th:date-time="${schedule}"
+                  onsubmit="saveGrade(this)">
+            <input id="input-grade" th:value="${studentGrade.grades.get(schedule)?.value}" >
+            </form>
+          </td>
         </tr>
         </tbody>
       </table>
