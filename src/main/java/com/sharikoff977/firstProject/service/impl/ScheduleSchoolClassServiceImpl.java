@@ -13,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,11 +32,10 @@ public class ScheduleSchoolClassServiceImpl {
 
         SchoolClass schoolClass = schoolClassRepo.findByName(className);
         scheduleSchoolClassDTO.setSchoolClassId(schoolClass.getId());
-        List<DayOfWeekDTO> days = new ArrayList<>();
+        List<DayOfWeekDTO> days = Arrays.asList(new DayOfWeekDTO[7]);
+        scheduleSchoolClassDTO.setDays(days);
 
         List<Schedule> schedules = scheduleRepo.findAllBySchoolClassId(schoolClass.getId());
-
-        Map<Integer, DayOfWeekDTO> dowMap = new HashMap<>();
 
         for (Schedule schedule : schedules){
 
@@ -49,13 +45,12 @@ public class ScheduleSchoolClassServiceImpl {
             lesson.setTeacherName(teacherRepo.getById(schedule.getTeacherId()).getName());
             lesson.setRoomNumber(schoolRoomRepo.getById(schedule.getSchoolRoomId()).getNumber());
 
-            DayOfWeekDTO day = dowMap.get(schedule.getDayOfWeek().getValue());
+            DayOfWeekDTO day = days.get(schedule.getDayOfWeek().getValue());
             if (day == null){
                 day = new DayOfWeekDTO();
                 day.setDay(schedule.getDayOfWeek());
                 day.setLessons(new ArrayList<>());
-                dowMap.put(schedule.getDayOfWeek().getValue(), day);
-                days.add(day);
+                days.set(schedule.getDayOfWeek().getValue(), day);
             }
             //List<LessonDTO> lessons = day.getLessons();
             day.getLessons().add(lesson);
@@ -93,7 +88,6 @@ public class ScheduleSchoolClassServiceImpl {
             }
             days.add(day);
         }*/
-        scheduleSchoolClassDTO.setDays(days);
         return scheduleSchoolClassDTO;
     }
 
