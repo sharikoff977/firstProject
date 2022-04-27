@@ -53,6 +53,7 @@ public class ScheduleSchoolClassServiceImpl {
             if (day == null){
                 day = new DayOfWeekDTO();
                 day.setDay(schedule.getDayOfWeek());
+                day.setLessons(new ArrayList<>());
                 dowMap.put(schedule.getDayOfWeek().getValue(), day);
                 days.add(day);
             }

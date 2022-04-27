@@ -44,4 +44,5 @@ public class DebugController {
     public ResponseEntity<List<LessonDTO>> getSchedule(){
         return ResponseEntity.ok().body(lessonServiceImpl.findAll().stream().map(lessonMapper::toDto).collect(Collectors.toList()));
     }
+
 }
