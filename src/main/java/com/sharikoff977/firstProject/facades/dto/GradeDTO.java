@@ -11,4 +11,5 @@ public class GradeDTO {
     private Long studentId;
     private Integer value;
     private ZonedDateTime dateTime;
+    private Long schoolBookScheduleId;
 }

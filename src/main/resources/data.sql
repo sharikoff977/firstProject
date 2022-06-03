@@ -12,7 +12,7 @@ INSERT INTO public.subject(id, title) VALUES (13, 'maths');
 INSERT INTO public.subject(id, title) VALUES (14, 'language');
 INSERT INTO public.subject(id, title) VALUES (15, 'reading');
 INSERT INTO public.subject(id, title) VALUES (16, 'test');
-INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (17, '2022-03-01', 12, 5, 13);
+/*INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (17, '2022-03-01', 12, 5, 13);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (18, '2022-03-05', 9, 5, 13);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (19, '2022-03-02', 11, 6, 13);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (20, '2022-03-03', 10, 7, 13);
@@ -51,7 +51,7 @@ INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (1
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (153, '2022-03-05', 12, 9, 16);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (154, '2022-03-02', 11, 10, 16);
 INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (155, '2022-03-03', 10, 11, 16);
-INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (156, '2022-03-04', 9, 12, 16);
+INSERT INTO public.grade(id, date_time, value, student_id, subject_id) VALUES (156, '2022-03-04', 9, 12, 16);*/
 
 INSERT INTO public.teacher(id, name) VALUES (157, 'Anna Parkhomenko');
 INSERT INTO public.teacher(id, name) VALUES (158, 'Marina Sharovskaya');
@@ -70,7 +70,18 @@ INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (168, 4, '11:00:0
 INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (169, 5, '12:00:00');
 INSERT INTO public.lesson(id, "number", time_of_lesson) VALUES (170, 6, '13:00:00');
 
-INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (49, '2022-03-01', 1, 13, 'MONDAY', 161, 157, 165);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (49, 1, 13, 'MONDAY', 161, 157, 165);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (50, 1, 13, 'TUESDAY', 161, 157, 166);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (51, 1, 13, 'WEDNESDAY', 161, 157, 167);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (52, 1, 13, 'THURSDAY', 161, 157, 168);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (53, 1, 13, 'FRIDAY', 161, 157, 169);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (54, 1, 14, 'MONDAY', 162, 158, 166);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (55, 1, 14, 'TUESDAY', 162, 158, 167);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (56, 1, 14, 'WEDNESDAY', 162, 158, 168);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (57, 1, 14, 'THURSDAY', 162, 158, 169);
+INSERT INTO public.schedule(id, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (58, 1, 14, 'FRIDAY', 162, 158, 165);
+
+/*INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (49, '2022-03-01', 1, 13, 'MONDAY', 161, 157, 165);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (50, '2022-03-02', 1, 13, 'TUESDAY', 161, 157, 166);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (51, '2022-03-03', 1, 13, 'WEDNESDAY', 161, 157, 167);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (52, '2022-03-04', 1, 13, 'THURSDAY', 161, 157, 168);
@@ -80,7 +91,7 @@ INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, 
 INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (56, '2022-03-03', 1, 14, 'WEDNESDAY', 162, 158, 168);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (57, '2022-03-04', 1, 14, 'THURSDAY', 162, 158, 169);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id, day_of_week, school_room_id, teacher_id, lesson_id) VALUES (58, '2022-03-05', 1, 14, 'FRIDAY', 162, 158, 165);
-/*INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (59, '2022-03-01', 1, 15);
+INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (59, '2022-03-01', 1, 15);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (60, '2022-03-02', 1, 15);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (61, '2022-03-03', 1, 15);
 INSERT INTO public.schedule(id, date, school_class_id, subject_id) VALUES (62, '2022-03-04', 1, 15);

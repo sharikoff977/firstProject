@@ -11,6 +11,7 @@ import com.sharikoff977.firstProject.service.mapper.SubjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
@@ -31,9 +32,10 @@ public class SchoolBookController {
 
   private final GradeService gradeService;
 
-  @GetMapping("/api/school-book/{clazz}")
-  public SchoolBookDTO getSchoolBook(@PathVariable("clazz") String clazz) throws JsonProcessingException {
-    SchoolBookDTO schoolBook = schoolBookService.getSchoolBook(clazz);
+  @GetMapping("/api/school-book")
+  public SchoolBookDTO getSchoolBook(@RequestParam(name = "clazz", required = false) String clazz,
+                                     @RequestParam(name = "data", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime dateTime) throws JsonProcessingException {
+    SchoolBookDTO schoolBook = schoolBookService.getSchoolBook(clazz, dateTime);
     /*Integer maxGradesCount = schoolBook.getSubjects().stream()
         .map(SbSubjectDTO::getStudentGrades)
         .flatMap(List::stream)

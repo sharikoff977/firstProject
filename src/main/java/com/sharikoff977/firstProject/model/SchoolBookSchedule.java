@@ -6,11 +6,9 @@ import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 
-import static java.time.DayOfWeek.MONDAY;
-
 @Entity
 @Data
-public class Schedule {
+public class SchoolBookSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,14 +26,7 @@ public class Schedule {
     @Column(name = "school_room_id")
     private Long schoolRoomId;
 
-    /*@Column(name = "date")
-    private ZonedDateTime date;*/
-
-    @Column(name = "day_of_week")
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWeek;
-
-    @OneToOne
-    private Lesson lesson;
+    @Column(name = "date")
+    private ZonedDateTime date;
 
 }
