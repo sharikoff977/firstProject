@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface GradeRepo extends JpaRepository<Grade, Long> {
     List<Grade> findAllByStudent(Student student);
     List<Grade> findAllByStudentAndSchoolBookSchedule(Student student, SchoolBookSchedule schoolBookSchedule);
+
     //List<Grade> getAllByStudent(Student student);
 }

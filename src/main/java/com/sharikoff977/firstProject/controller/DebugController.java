@@ -1,16 +1,11 @@
 package com.sharikoff977.firstProject.controller;
 
 import com.sharikoff977.firstProject.facades.dto.LessonDTO;
-import com.sharikoff977.firstProject.facades.dto.StudentDTO;
-import com.sharikoff977.firstProject.facades.dto.schoolBook.SchoolBookDTO;
-import com.sharikoff977.firstProject.model.Grade;
 import com.sharikoff977.firstProject.model.SchoolBookSchedule;
 import com.sharikoff977.firstProject.model.SchoolClass;
-import com.sharikoff977.firstProject.model.Student;
 import com.sharikoff977.firstProject.repo.GradeRepo;
 import com.sharikoff977.firstProject.repo.SchoolBookScheduleRepo;
 import com.sharikoff977.firstProject.repo.SchoolClassRepo;
-import com.sharikoff977.firstProject.service.LessonService;
 import com.sharikoff977.firstProject.service.impl.LessonServiceImpl;
 import com.sharikoff977.firstProject.service.impl.SchoolBookServiceImpl;
 import com.sharikoff977.firstProject.service.mapper.LessonMapper;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -53,7 +47,7 @@ public class DebugController {
     @GetMapping("/school-book-schedule")
     public ResponseEntity<List<SchoolBookSchedule>> getAllBySchoolClassIdAndDate(@RequestParam(name = "classId", required = false) Long id,
                                                                                   @RequestParam(name = "dateTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime dateTime){
-        return ResponseEntity.ok(schoolBookScheduleRepo.findAllBySchoolClassIDAndDate(id, dateTime));
+        return ResponseEntity.ok(schoolBookScheduleRepo.findAllBySchoolClassIdAndDate(id, dateTime));
     }
 
 }

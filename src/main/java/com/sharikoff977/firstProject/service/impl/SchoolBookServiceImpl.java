@@ -1,7 +1,6 @@
 package com.sharikoff977.firstProject.service.impl;
 
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbGradeIdValueDTO;
-import com.sharikoff977.firstProject.facades.dto.StudentDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbStudentGradeDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SbSubjectDTO;
 import com.sharikoff977.firstProject.facades.dto.schoolBook.SchoolBookDTO;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -84,7 +82,8 @@ public class SchoolBookServiceImpl implements SchoolBookService {
         schoolBookDTO.setSchoolClass(schoolClassMapper.toDto(schoolClass));
         schoolBookDTO.setSubjects(new ArrayList<>());
 
-        List<SchoolBookSchedule> schoolBookSchedules = schoolBookScheduleRepo.findAllBySchoolClassIDAndDate(schoolClass.getId(), dateTime);
+        List<SchoolBookSchedule> schoolBookSchedules = schoolBookScheduleRepo.findAllBySchoolClassIdAndDate(schoolClass.getId(), dateTime);
+
         Set<Student> students = schoolClass.getStudents();
 
         Map<Long, SbSubjectDTO> subjectMap1 = new HashMap<>();
@@ -131,7 +130,8 @@ public class SchoolBookServiceImpl implements SchoolBookService {
             zonedDateTimeIntegerMap.put(schedule.getDate(), null);
         }*/
 
-        /*for(Student student : schoolClass.getStudents()){
+        /*Map<Long, SbSubjectDTO> subjectMap = new HashMap<>();
+          for(Student student : schoolClass.getStudents()){
 
             StudentDTO studentDTO = studentMapper.toDto(student);
 

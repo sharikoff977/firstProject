@@ -15,7 +15,7 @@ import java.util.List;
 public interface SchoolBookScheduleRepo extends JpaRepository<SchoolBookSchedule, Long> {
 
     @Query("from SchoolBookSchedule where schoolClassId = :schoolClassId and date >= :dateTime ")
-    List<SchoolBookSchedule> findAllBySchoolClassIDAndDate(@Param("schoolClassId") Long id,
+    List<SchoolBookSchedule> findAllBySchoolClassIdAndDate(@Param("schoolClassId") Long id,
                                                            @Param("dateTime") ZonedDateTime date);
 
     @Query("from SchoolBookSchedule where schoolClassId = :schoolClassId " +
